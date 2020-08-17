@@ -1,0 +1,9 @@
+server:
+  host: 
+  port: 5678
+  mode: debug
+database:
+  mysql:
+    url: root@tcp(127.0.0.1)/test
+    max_idle_conns: 5
+    max_open_conns: 0 #unlimited
