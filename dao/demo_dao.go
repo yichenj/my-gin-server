@@ -18,7 +18,9 @@ func NewDemoDao() *DemoDao {
 }
 
 func (dao *DemoDao) Create(demo *model.Demo) (int, error) {
-	result, err := dao.DataAccessObject.Exec("INSERT INTO demos (name, description, create_time) VALUES (?, ?, ?)", demo.Name, demo.Description, demo.CreateTime)
+	result, err := dao.DataAccessObject.Exec(
+		"INSERT INTO demos (name, description, create_time) VALUES (?, ?, ?)",
+		demo.Name, demo.Description, demo.CreateTime)
 	if err != nil {
 		applog.Error.Printf("Some errors should be hidden from apis: %s", err.Error())
 		return 0, apperror.ErrDatabase
@@ -64,7 +66,8 @@ func (dao *DemoDao) List(offset int, limit int) ([]*model.Demo, int, error) {
 	count.Next()
 	count.Scan(&total)
 
-	rows, err := dao.DataAccessObject.Query("SELECT * FROM demos LIMIT ? OFFSET ?", limit, offset)
+	rows, err := dao.DataAccessObject.Query(
+		"SELECT * FROM demos LIMIT ? OFFSET ?", limit, offset)
 	if err != nil {
 		applog.Error.Print(err)
 		return nil, 0, apperror.ErrDatabase
@@ -85,7 +88,8 @@ func (dao *DemoDao) List(offset int, limit int) ([]*model.Demo, int, error) {
 }
 
 func (dao *DemoDao) QueryById(id int) (*model.Demo, error) {
-	rows, err := dao.DataAccessObject.Query("SELECT * FROM demos WHERE id = ? LIMIT 1", id)
+	rows, err := dao.DataAccessObject.Query(
+		"SELECT * FROM demos WHERE id = ? LIMIT 1", id)
 	if err != nil {
 		applog.Error.Print(err)
 		return nil, apperror.ErrDatabase

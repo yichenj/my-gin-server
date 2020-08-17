@@ -19,7 +19,8 @@ type CliFlags struct {
 
 func ParseFlags() *CliFlags {
 	var cliFlags CliFlags
-	flag.StringVar(&cliFlags.ConfigPath, "config", "conf/app_cfg.yml", "path to config file")
+	flag.StringVar(&cliFlags.ConfigPath,
+		"config", "conf/app_cfg.yml", "path to config file")
 	flag.StringVar(&cliFlags.LogLevel, "log-level", "INFO", "default log level")
 
 	flag.Parse()
@@ -33,7 +34,8 @@ func main() {
 
 	config, err := appconfig.NewConfig(cliFlags.ConfigPath)
 	if err != nil {
-		applog.Error.Panicf("Cannot load config %s, error: %s", cliFlags.ConfigPath, err)
+		applog.Error.Panicf("Cannot load config %s, error: %s",
+			cliFlags.ConfigPath, err)
 	}
 	applog.Info.Printf("Server initializing with config: %+v\n", *config)
 

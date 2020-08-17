@@ -23,7 +23,8 @@ func NewDemoAPI(demoService *service.DemoService) *DemoAPI {
 func (api *DemoAPI) Create(ctx *gin.Context) {
 	var demoVO vo.Demo
 	if err := ctx.BindJSON(&demoVO); err != nil {
-		ctx.JSON(http.StatusBadRequest, apperror.New(apperror.ERR_INPUT_FORMAT, err.Error()))
+		ctx.JSON(http.StatusBadRequest, apperror.New(
+			apperror.ERR_INPUT_FORMAT, err.Error()))
 		return
 	}
 
@@ -33,7 +34,11 @@ func (api *DemoAPI) Create(ctx *gin.Context) {
 		extraInfo, _ = middlewareInfo.(string)
 	}
 
-	demoDTO := dto.DemoDTO{Name: demoVO.Name, Description: demoVO.Description, ExtraInfo: extraInfo}
+	demoDTO := dto.DemoDTO{
+		Name:        demoVO.Name,
+		Description: demoVO.Description,
+		ExtraInfo:   extraInfo,
+	}
 	demoID, err := api.demoService.Create(&demoDTO)
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, err)
