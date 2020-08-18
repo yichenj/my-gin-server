@@ -1,11 +1,10 @@
 # My Gin Server
-An API service scaffold base on Golang Gin framework.
+An API service scaffold based on Golang Gin framework.
 
 ## Features
 - [X] Strict layered design pattern, suitable for large scale project in real world
 - [X] Lightweight and clean implementation
-- [X] Least third-party dependency
-- [X] Highly customizable
+- [X] Least third-party dependency, highly customizable
 - [X] Go modules for dependency management
 - [X] MIT License
 
@@ -127,6 +126,8 @@ database:
 * `server:mode`: Gin running mode, `debug` or `release`
 * `mysql:url`: database access URL
 * `max_idle_conns` and `max_open_conns`: connection pool settings for the `database/sql` library
+
+Add your own config items in `base/appconfig/appconfig.go`
 ### Project Structure
 
 ## Design Considerations
