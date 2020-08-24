@@ -129,5 +129,48 @@ database:
 
 Add your own config items in `base/appconfig/appconfig.go`
 ### Project Structure
+We have implemtented a series of APIs to CRUD records in table `demos` in this project so as to explain how to use this scaffold. Basically, the project follows MVC pattern, and the controller part is further splitted into three layers: API layer, Service layer and DAO layer. The following file structure describes what each file is used for.
+
+```zsh
+.
+├── LICENSE
+├── README.md
+├── api                         # API layer, defines all handler functions bound to a URL, handles http input/output
+│   ├── demo_api.go             # 'demo' API implementation
+│   └── vo                      # Defines the API layer input/output speficition, kind of closing to View of MVC
+│       └── demo_vo.go          # 'demo' API JSON input/output struct
+├── base
+│   ├── appconfig
+│   │   └── appconfig.go        # Config definations and implementation
+│   ├── apperror
+│   │   ├── apperror.go         # Error handling implementation
+│   │   └── error_code.go       # All error code definations
+│   ├── applog
+│   │   └── applog.go           # Log functions wrapper
+│   └── db
+│       ├── facade.go           # Database interface wrapper
+│       └── mysql.go            # MySQL related implementation
+├── conf
+│   └── app_cfg.yml             # Server config file
+├── dao                         # DAO layer, defines database access functions (SQL implementation mostly)
+│   └── demo_dao.go             # 'demo' API DAO implementation
+├── go.mod                      # Go module file
+├── go.sum                      # Go module generated
+├── init.go                     # Init API service process: initialize API/Service/Dao instance mainly
+├── main.go                     # Entry: initialize infrastructure, CLI flags, log, databases and so on
+├── middleware                  # Gin middleware functions
+│   └── middleware.go           # A simple middleware example
+├── model                       # Model layer, persist the object in database
+│   └── demo.go                 # Map to 'demos' table in database
+├── my-gin-server               # Binary file to run
+├── router                      # Router protocol, map URL path to its handler function
+│   └── demo_router.go          # 'demo' API supported path 
+├── service                     # Service layer, main service logic
+│   ├── demo_service.go         # 'demo' API service implementation
+│   └── dto                     # Defines the Service layer input/output, often used when need to re-organize multiple inputs/outputs and transfer them in services.
+│       └── demo_dto.go         # 'demo' API DTO definations
+└── sql
+    └── init_db.sql             # Database init script
+```
 
 ## Design Considerations
