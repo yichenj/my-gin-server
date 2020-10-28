@@ -174,3 +174,6 @@ We have implemtented a series of APIs to CRUD records in table `demos` in this p
 ```
 
 ## Design Considerations
+### SQL vs ORM
+### Dependency Injection
+### Log Library
