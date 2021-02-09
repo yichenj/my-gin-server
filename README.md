@@ -6,7 +6,6 @@ An API service scaffold based on Golang Gin framework.
 - [X] Lightweight and clean implementation
 - [X] Least third-party dependency, highly customizable
 - [X] Go modules for dependency management
-- [X] MIT License
 
 ## Usage
 
